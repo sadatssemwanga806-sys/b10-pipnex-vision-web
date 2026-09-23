@@ -14,52 +14,49 @@ const TRENDS = [
 export default function Page() {
   const [search, setSearch] = useState("");
   const [cat, setCat] = useState("All");
-  const [liveCount, setLiveCount] = useState(10234);
+  const [liveCount, setLiveCount] = useState(10254);
 
   useEffect(() => {
-    const i = setInterval(() => setLiveCount(c => c + Math.floor(Math.random()*10)), 2000);
+    const i = setInterval(() => setLiveCount(c => c + Math.floor(Math.random()*8)), 2000);
     return () => clearInterval(i);
   }, []);
 
-  const filtered = TRENDS.filter(t => 
-    (cat === "All" || t.cat === cat) && 
-    t.title.toLowerCase().includes(search.toLowerCase())
-  );
+  const filtered = TRENDS.filter(t => (cat === "All" || t.cat === cat) && t.title.toLowerCase().includes(search.toLowerCase()));
 
   return (
-    <div className="min-h-screen bg-black text-white p-4">
-      <header className="flex justify-between items-center max-w-6xl mx-auto py-4">
-        <h1 className="text-2xl font-black">PIPNEX 🔥</h1>
-        <div className="bg-green-500 text-black px-3 py-1 rounded-full text-sm font-bold animate-pulse">
-          B10 LIVE • {liveCount.toLocaleString()}
+    <div style={{minHeight:"100vh", background:"#000", color:"#fff", fontFamily:"sans-serif", padding:"16px"}}>
+      <div style={{maxWidth:"1000px", margin:"0 auto"}}>
+        <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
+          <h1 style={{fontWeight:900, fontSize:"28px"}}>PIPNEX 🔥</h1>
+          <div style={{background:"#22c55e", color:"#000", padding:"6px 14px", borderRadius:"999px", fontWeight:800, fontSize:"12px"}}>B10 LIVE • {liveCount.toLocaleString()}</div>
         </div>
-      </header>
 
-      <div className="max-w-6xl mx-auto text-center mt-10">
-        <h2 className="text-5xl font-black">Pipnex Trending Website</h2>
-        <p className="text-gray-400 mt-3">Real-time trends before they blow • B10 2026</p>
-        
-        <div className="flex gap-2 justify-center mt-6 flex-wrap">
-          {["All","Tech","Music","Fashion","Crypto"].map(c => (
-            <button key={c} onClick={()=>setCat(c)} className={`px-4 py-2 rounded-full border ${cat===c ? 'bg-white text-black' : 'border-gray-700'}`}>{c}</button>
+        <div style={{textAlign:"center", marginTop:"40px"}}>
+          <h2 style={{fontSize:"42px", fontWeight:900, lineHeight:1}}>Pipnex Trending<br/>Website</h2>
+          <p style={{color:"#888", marginTop:"10px"}}>Real-time trends before they blow • B10 2026</p>
+          
+          <div style={{display:"flex", gap:"8px", justifyContent:"center", flexWrap:"wrap", marginTop:"20px"}}>
+            {["All","Tech","Music","Fashion","Crypto"].map(c => (
+              <button key={c} onClick={()=>setCat(c)} style={{padding:"8px 16px", borderRadius:"999px", border:"1px solid #333", background: cat===c ? "#fff" : "#111", color: cat===c ? "#000" : "#fff", fontWeight:700}}>{c}</button>
+            ))}
+          </div>
+
+          <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search trends..." style={{marginTop:"20px", width:"100%", maxWidth:"400px", padding:"14px 20px", borderRadius:"999px", background:"#111", border:"1px solid #333", color:"#fff", outline:"none"}} />
+        </div>
+
+        <div style={{display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))", gap:"16px", marginTop:"30px"}}>
+          {filtered.map(t => (
+            <div key={t.id} style={{background:"#111", border:"1px solid #222", borderRadius:"20px", padding:"20px"}}>
+              <div style={{display:"flex", justifyContent:"space-between", fontSize:"12px", color:"#888"}}><span>{t.platform}</span><span style={{color:"#22c55e", fontWeight:800}}>{t.growth}</span></div>
+              <h3 style={{fontWeight:800, fontSize:"18px", marginTop:"10px"}}>{t.title}</h3>
+              <p style={{color:"#888", fontSize:"13px", marginTop:"4px"}}>{t.views} views • Trending NOW</p>
+              <button style={{marginTop:"14px", width:"100%", background:"#fff", color:"#000", padding:"10px", borderRadius:"999px", fontWeight:900, border:"none"}}>View Trend</button>
+            </div>
           ))}
         </div>
 
-        <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search trends..." className="mt-6 w-full max-w-md mx-auto block bg-zinc-900 border border-zinc-700 rounded-full px-5 py-3 outline-none" />
+        <p style={{textAlign:"center", color:"#444", fontSize:"11px", marginTop:"60px"}}>B10 VISION • PIPNEX 2026 • WE LOCKED FOREVER</p>
       </div>
-
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">
-        {filtered.map(t => (
-          <div key={t.id} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 hover:border-green-500 transition">
-            <div className="flex justify-between text-xs text-gray-400"><span>{t.platform}</span><span className="text-green-400">{t.growth}</span></div>
-            <h3 className="font-bold text-lg mt-2">{t.title}</h3>
-            <p className="text-gray-400 text-sm mt-1">{t.views} views • Trending NOW</p>
-            <button className="mt-4 w-full bg-white text-black py-2 rounded-full font-bold">View Trend</button>
-          </div>
-        ))}
-      </div>
-
-      <footer className="text-center text-gray-600 text-xs mt-20">B10 VISION • PIPNEX 2026 • WE LOCKED FOREVER</footer>
     </div>
   );
 }
