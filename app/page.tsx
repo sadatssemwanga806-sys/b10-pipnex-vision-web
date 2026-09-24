@@ -1,5 +1,5 @@
-
 "use client";
+import Money from './Money'
 import { useState, useEffect } from "react";
 
 const WHATSAPP_NUMBER = "256744995244";
@@ -70,7 +70,6 @@ export default function Page() {
           <a href={waLink} style={{display:"inline-block", marginTop:"12px", background:"#000", color:"#fff", padding:"14px 28px", borderRadius:"999px", fontWeight:900, textDecoration:"none"}}>LOCK MY SLOT — WhatsApp B10</a>
         </div>
         <p style={{textAlign:"center", color:"#444", fontSize:"11px", marginTop:"30px"}}>B10 VISION • PIPNEX 2026 • 0744995244 • WE LOCKED FOREVER</p>
-      </div>
+      </div>      <Money />
     </div>
-  );
-}
+  
