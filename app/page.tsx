@@ -1,82 +1,83 @@
-"use client";
-import Money from './Money'
-import { useState, useEffect } from "react";
 
-const WHATSAPP_NUMBER = "256744995244";
-const WHATSAPP_MSG = "Yo B10! I want to promote my trend on Pipnex 🔥";
+      "use client"
+import { useState } from "react"
 
-const TRENDS = [
-  { id: 1, title: "Kampala Music Challenge", platform: "TikTok", views: "2.4M", growth: "+340%", cat: "Music" },
-  { id: 2, title: "B10 Vision Story", platform: "YouTube", views: "890K", growth: "+210%", cat: "Tech" },
-  { id: 3, title: "Pipnex Launch", platform: "Google", views: "1.2M", growth: "+180%", cat: "Tech" },
-  { id: 4, title: "Uganda Fashion Week", platform: "Instagram", views: "560K", growth: "+150%", cat: "Fashion" },
-  { id: 5, title: "Crypto B10 Coin", platform: "X", views: "3.1M", growth: "+420%", cat: "Crypto" },
-  { id: 6, title: "AI Side Hustles 2026", platform: "YouTube", views: "1.8M", growth: "+290%", cat: "Tech" },
-];
+const trends = [
+{ p: "TikTok", t: "Kampala Music Challenge", v: "2.4M views", g: "+340%" },
+{ p: "X", t: "Crypto B10 Coin", v: "3.1M views", g: "+420%" },
+{ p: "YouTube", t: "AI Side Hustles 2026", v: "1.8M views", g: "+290%" },
+]
 
-export default function Page() {
-  const [search, setSearch] = useState("");
-  const [cat, setCat] = useState("All");
-  const [liveCount, setLiveCount] = useState(10254);
-  useEffect(() => {
-    const i = setInterval(() => setLiveCount(c => c + Math.floor(Math.random()*8)), 2000);
-    return () => clearInterval(i);
-  }, []);
-  const filtered = TRENDS.filter(t => (cat === "All" || t.cat === cat) && t.title.toLowerCase().includes(search.toLowerCase()));
-  const waLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MSG)}`;
-  const promoLink = (title:string) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Yo B10! I want to promote "${title}" on Pipnex 🔥 My budget is...`)}`;
+export default function Page(){
+const [q,setQ]=useState("")
+const [f,setF]=useState("All")
+const cats=["All","Tech","Music","Fashion","Crypto"]
+const filtered=trends.filter(x=> x.t.toLowerCase().includes(q.toLowerCase()))
+const waLink="https://wa.me/256744995244?text=Yo%20B10%20I%20want%20to%20promote%20%F0%9F%94%A5"
 
-  return (
-    <div style={{minHeight:"100vh", background:"#000", color:"#fff", fontFamily:"sans-serif", padding:"16px"}}>
-      <div style={{maxWidth:"1000px", margin:"0 auto"}}>
-        <div style={{display:"flex", justifyContent:"space-between", alignItems:"center", gap:"8px"}}>
-          <h1 style={{fontWeight:900, fontSize:"26px"}}>PIPNEX 🔥</h1>
-          <div style={{display:"flex", gap:"8px", alignItems:"center"}}>
-            <div style={{background:"#22c55e", color:"#000", padding:"6px 12px", borderRadius:"999px", fontWeight:800, fontSize:"11px"}}>B10 LIVE • {liveCount.toLocaleString()}</div>
-            <a href={waLink} style={{background:"#25D366", color:"#000", padding:"8px 14px", borderRadius:"999px", fontWeight:900, fontSize:"12px", textDecoration:"none"}}>💰 PROMOTE</a>
-          </div>
-        </div>
-        <div style={{textAlign:"center", marginTop:"36px"}}>
-          <h2 style={{fontSize:"42px", fontWeight:900, lineHeight:1}}>Pipnex Trending<br/>Website</h2>
-          <p style={{color:"#888", marginTop:"10px"}}>Real-time trends before they blow • B10 2026</p>
-          <div style={{background:"#111", border:"1px solid #25D366", borderRadius:"16px", padding:"14px", marginTop:"20px", maxWidth:"500px", margin:"20px auto 0"}}>
-            <p style={{fontWeight:800, fontSize:"14px"}}>🚀 Got a song, product, brand?</p>
-            <p style={{color:"#888", fontSize:"12px", marginTop:"4px"}}>Be #1 Trending for 24hrs — Artists & Businesses in UG</p>
-            <a href={waLink} style={{display:"inline-block", marginTop:"10px", background:"#25D366", color:"#000", padding:"12px 22px", borderRadius:"999px", fontWeight:900, fontSize:"14px", textDecoration:"none"}}>WhatsApp B10 to Promote →</a>
-          </div>
-          <div style={{display:"flex", gap:"8px", justifyContent:"center", flexWrap:"wrap", marginTop:"20px"}}>
-            {["All","Tech","Music","Fashion","Crypto"].map(c => (
-              <button key={c} onClick={()=>setCat(c)} style={{padding:"8px 16px", borderRadius:"999px", border:"1px solid #333", background: cat===c ? "#fff" : "#111", color: cat===c ? "#000" : "#fff", fontWeight:700}}>{c}</button>
-            ))}
-          </div>
-          <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search trends..." style={{marginTop:"16px", width:"100%", maxWidth:"400px", padding:"14px 20px", borderRadius:"999px", background:"#111", border:"1px solid #333", color:"#fff", outline:"none"}} />
-        </div>
-        <div style={{display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))", gap:"16px", marginTop:"24px"}}>
-          {filtered.map(t => (
-            <div key={t.id} style={{background:"#111", border:"1px solid #222", borderRadius:"20px", padding:"20px"}}>
-              <div style={{display:"flex", justifyContent:"space-between", fontSize:"12px", color:"#888"}}><span>{t.platform}</span><span style={{color:"#22c55e", fontWeight:800}}>{t.growth}</span></div>
-              <h3 style={{fontWeight:800, fontSize:"18px", marginTop:"10px"}}>{t.title}</h3>
-              <p style={{color:"#888", fontSize:"13px", marginTop:"4px"}}>{t.views} views • Trending NOW</p>
-              <div style={{display:"flex", gap:"8px", marginTop:"14px"}}>
-                <button style={{flex:1, background:"#fff", color:"#000", padding:"10px", borderRadius:"999px", fontWeight:900, border:"none"}}>View</button>
-                <a href={promoLink(t.title)} style={{flex:1, background:"#25D366", color:"#000", padding:"10px", borderRadius:"999px", fontWeight:900, textAlign:"center", textDecoration:"none", fontSize:"13px"}}>Promote 🔥</a>
-              </div>
-            </div>
-    ))}</div>
-<div style={{textAlign:"center", marginTop:"36px"}}>
-<h2 style={{fontSize:"42px", fontWeight:900, lineHeight:"1"}}>Need this?</h2>
-<p style={{color:"#888", marginTop:"10px"}}>Real-time promo site for your brand</p>
-<div style={{background:"#111", border:"1px solid #222", padding:"16px", borderRadius:"16px", marginTop:"16px"}}>
-<p style={{fontWeight:800, fontSize:"14px"}}>🚀 We build it for you</p>
-<p style={{color:"#888", fontSize:"12px", marginTop:"4px"}}>Templates, domain, hosting + MoMo</p>
-<a href={waLink} style={{display:"inline-block", background:"#fff", color:"#000", padding:"10px 16px", borderRadius:"999px", marginTop:"12px", textDecoration:"none", fontWeight:900}}>Chat on WhatsApp</a>
+function Money(){
+const [open,setOpen]=useState(false)
+return(<>
+<button onClick={()=>setOpen(!open)} style={{position:"fixed",bottom:"20px",right:"20px",zIndex:9999,background:"#FFD600",color:"#000",border:"none",width:"60px",height:"60px",borderRadius:"50%",fontSize:"26px",fontWeight:900,boxShadow:"0 4px 20px rgba(0,0,0,0.5)",cursor:"pointer"}}>💰</button>
+{open&&<div style={{position:"fixed",bottom:"90px",right:"20px",zIndex:9999,background:"#111",border:"1px solid #333",borderRadius:"16px",padding:"16px",width:"260px"}}>
+<p style={{color:"#fff",fontWeight:900}}>💰 Send MoMo</p>
+<p style={{color:"#FFD600",fontSize:"22px",fontWeight:900,marginTop:"8px"}}>0760957999</p>
+<p style={{color:"#888",fontSize:"12px"}}>Name: B10 Pipnex</p>
+<button onClick={()=>{navigator.clipboard.writeText("0760957999");alert("Copied!")}} style={{width:"100%",background:"#FFD600",color:"#000",border:"none",padding:"10px",borderRadius:"10px",marginTop:"10px",fontWeight:900}}>Copy Number</button>
+<a href={waLink} style={{display:"block",textAlign:"center",background:"#fff",color:"#000",padding:"10px",borderRadius:"10px",marginTop:"8px",textDecoration:"none",fontWeight:900,fontSize:"12px"}}>Confirm on WhatsApp</a>
+</div>}
+</>)}
+  
+return(
+<div style={{background:"#000",minHeight:"100vh",color:"#fff",padding:"16px"}}>
+<div style={{maxWidth:"480px",margin:"0 auto"}}>
+<div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"24px"}}>
+<h1 style={{fontWeight:900,fontSize:"24px"}}>PIPNEX 🔥</h1>
+<div style={{display:"flex",gap:"8px"}}>
+<span style={{background:"#00FF66",color:"#000",padding:"6px 12px",borderRadius:"999px",fontSize:"12px",fontWeight:900}}>B10 LIVE • 10,260</span>
+<a href={waLink} style={{background:"#00FF66",color:"#000",padding:"6px 12px",borderRadius:"999px",fontSize:"12px",fontWeight:900,textDecoration:"none"}}>💰 PROMOTE</a>
 </div>
 </div>
-<p style={{textAlign:"center", color:"#444", fontSize:"12px", marginTop:"24px"}}>© 2025 Pipnex Vision</p>
+
+<h1 style={{fontSize:"48px",fontWeight:900,textAlign:"center",lineHeight:"1.1"}}>Pipnex Trending Website</h1>
+<p style={{textAlign:"center",color:"#888",marginTop:"12px"}}>Real-time trends before they blow • B10 2026</p>
+
+<div style={{border:"1px solid #00FF66",borderRadius:"16px",padding:"16px",textAlign:"center",marginTop:"20px",background:"rgba(0,255,102,0.05)"}}>
+<p style={{fontWeight:800}}>🚀 Got a song, product, brand?</p>
+<p style={{color:"#888",fontSize:"13px",marginTop:"6px"}}>Be #1 Trending for 24hrs — Artists & Businesses in UG</p>
+<a href={waLink} style={{display:"inline-block",background:"#00FF66",color:"#000",padding:"12px 20px",borderRadius:"999px",marginTop:"12px",fontWeight:900,textDecoration:"none"}}>WhatsApp B10 to Promote →</a>
+</div>
+
+<div style={{display:"flex",gap:"8px",flexWrap:"wrap",justifyContent:"center",marginTop:"16px"}}>
+{cats.map(c=><button key={c} onClick={()=>setF(c)} style={{padding:"8px 16px",borderRadius:"999px",border:"1px solid #333",background:f===c?"#fff":"#111",color:f===c?"#000":"#fff",fontWeight:700}}>{c}</button>)}
+</div>
+
+<input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search trends..." style={{width:"100%",background:"#111",border:"1px solid #333",padding:"14px",borderRadius:"999px",color:"#fff",marginTop:"16px"}}/>
+
+<div style={{marginTop:"16px",display:"flex",flexDirection:"column",gap:"12px"}}>
+{filtered.map((x,i)=>(
+<div key={i} style={{background:"#111",border:"1px solid #222",borderRadius:"20px",padding:"16px"}}>
+<div style={{display:"flex",justifyContent:"space-between"}}><span style={{color:"#888",fontSize:"12px"}}>{x.p}</span><span style={{color:"#00FF66",fontSize:"12px",fontWeight:800}}>{x.g}</span></div>
+<h3 style={{fontSize:"18px",fontWeight:900,marginTop:"6px"}}>{x.t}</h3>
+<p style={{color:"#666",fontSize:"13px",marginTop:"4px"}}>{x.v} • Trending NOW</p>
+<div style={{display:"flex",gap:"8px",marginTop:"12px"}}>
+<button style={{flex:1,background:"#fff",color:"#000",padding:"10px",borderRadius:"999px",fontWeight:800,border:"none"}}>View</button>
+<a href={waLink} style={{flex:1,background:"#00FF66",color:"#000",padding:"10px",borderRadius:"999px",fontWeight:800,textAlign:"center",textDecoration:"none"}}>Promote 🔥</a>
+</div>
+</div>
+))}
+</div>
+
+<div style={{background:"#00FF66",borderRadius:"20px",padding:"20px",textAlign:"center",marginTop:"20px"}}>
+<h2 style={{color:"#000",fontWeight:900,fontSize:"22px"}}>WANT TO BE TRENDING #1?</h2>
+<p style={{color:"#000",fontSize:"13px",marginTop:"6px"}}>5 slots per day. First come, first blow. 0744995244</p>
+<a href={waLink} style={{display:"inline-block",background:"#000",color:"#fff",padding:"12px 20px",borderRadius:"999px",marginTop:"12px",fontWeight:900,textDecoration:"none"}}>LOCK MY SLOT — WhatsApp B10</a>
+</div>
+
+<p style={{textAlign:"center",color:"#444",fontSize:"12px",marginTop:"20px"}}>B10 VISION • PIPNEX 2026 • 0744995244 • WE LOCKED FOREVER</p>
+<p style={{textAlign:"center",color:"#444",fontSize:"12px",marginTop:"8px"}}>© 2025 Pipnex Vision</p>
 </div>
 <Money />
 </div>
-</div>
 )
-}      
-      
+}
