@@ -62,14 +62,21 @@ export default function Page() {
                 <a href={promoLink(t.title)} style={{flex:1, background:"#25D366", color:"#000", padding:"10px", borderRadius:"999px", fontWeight:900, textAlign:"center", textDecoration:"none", fontSize:"13px"}}>Promote 🔥</a>
               </div>
             </div>
-          ))}
-        </div>
-        <div style={{textAlign:"center", marginTop:"40px", background:"#25D366", borderRadius:"20px", padding:"20px"}}>
-          <h3 style={{color:"#000", fontWeight:900, fontSize:"20px"}}>WANT TO BE TRENDING #1?</h3>
-          <p style={{color:"#000", opacity:0.7, fontSize:"13px", marginTop:"4px"}}>5 slots per day. First come, first blow. 0744995244</p>
-          <a href={waLink} style={{display:"inline-block", marginTop:"12px", background:"#000", color:"#fff", padding:"14px 28px", borderRadius:"999px", fontWeight:900, textDecoration:"none"}}>LOCK MY SLOT — WhatsApp B10</a>
-        </div>
-        <p style={{textAlign:"center", color:"#444", fontSize:"11px", marginTop:"30px"}}>B10 VISION • PIPNEX 2026 • 0744995244 • WE LOCKED FOREVER</p>
-      </div>      <Money />
-    </div>
-  
+    ))}</div>
+<div style={{textAlign:"center", marginTop:"36px"}}>
+<h2 style={{fontSize:"42px", fontWeight:900, lineHeight:"1"}}>Need this?</h2>
+<p style={{color:"#888", marginTop:"10px"}}>Real-time promo site for your brand</p>
+<div style={{background:"#111", border:"1px solid #222", padding:"16px", borderRadius:"16px", marginTop:"16px"}}>
+<p style={{fontWeight:800, fontSize:"14px"}}>🚀 We build it for you</p>
+<p style={{color:"#888", fontSize:"12px", marginTop:"4px"}}>Templates, domain, hosting + MoMo</p>
+<a href={waLink} style={{display:"inline-block", background:"#fff", color:"#000", padding:"10px 16px", borderRadius:"999px", marginTop:"12px", textDecoration:"none", fontWeight:900}}>Chat on WhatsApp</a>
+</div>
+</div>
+<p style={{textAlign:"center", color:"#444", fontSize:"12px", marginTop:"24px"}}>© 2025 Pipnex Vision</p>
+</div>
+<Money />
+</div>
+</div>
+)
+}      
+      
